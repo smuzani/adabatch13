@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>scope</title>
+</head>
+<body>
+
+<script>
+	var a = "global";
+
+	function f() {
+		a = "local";
+		console.log(a);
+		function g() {
+			var a = "local to g()";
+			
+		}
+	}
+	f();
+	console.log(a);
+
+</script>
+</body>
+</html>

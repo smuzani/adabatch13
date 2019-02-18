@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Objects</title>
+</head>
+<body>
+
+	<script>
+		function Hotel(name, rooms, booked) {
+			this.name = name;
+			this.rooms = rooms;
+			this.booked = booked;
+			this.checkAvailability = function() {
+				return this.rooms - this.booked;
+			}
+		}
+
+		var quayHotel = new Hotel("Quay", 40, 30);
+		var parkHotel = new Hotel("Park", 120, 77);
+		parkHotel.swimmingPool = true;
+
+		console.log(quayHotel);
+		console.log(parkHotel);
+	</script>
+</body>
+</html>
