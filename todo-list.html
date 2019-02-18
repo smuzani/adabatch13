@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>DOM - To Do List</title>
+</head>
+<body>
+	<h1>My To Do List</h1>
+	<label for="item">Enter a new item:</label>
+	<input type="text" name="item" id="item">
+	<button onclick="addItem()">Add item</button>
+
+	<ul id="list"></ul>
+
+
+	<script>
+		function addItem() {
+			var itemName = document.getElementById("item").value;
+			var list = document.getElementById("list");
+
+			var node = document.createElement("li");
+			node.innerHTML = itemName + " <button>delete</button>";
+			list.appendChild(node);
+		}
+	</script>
+</body>
+</html>

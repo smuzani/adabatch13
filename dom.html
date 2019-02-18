@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="em">
+<head>
+	<meta charset="utf-8">
+	<title>DOM</title>
+</head>
+<body>
+	<div id="example">
+		<p>example</p>
+	</div>
+
+
+	<script>
+		var div = document.getElementById("example");
+		// div.style.background = "red";
+
+		var paragraph = document.createElement("p");
+		paragraph.innerHTML = "this is a sample paragraph";
+		div.appendChild(paragraph);
+
+	</script>
+</body>
+</html>

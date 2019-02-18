@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Mouse Event Listener</title>
+</head>
+<body>
+	<img id="image" src="vsq.jpg" onclick="mouseClick()" onmouseout="mouseOut()">
+	<a href="google.com" id="link">Google</a>
+
+	<script>
+		var img = document.getElementById("image");
+		img.onmouseover = mouseover;
+		img.addEventListener('dblclick', doubleClick, false);
+
+		var link = document.getElementById("link");
+		img.addEventListener('click', function(event){
+			event.preventDefault()
+		}, false);		
+
+		function mouseClick() {
+			console.log('click');
+		}
+
+		function mouseover() {
+			console.log('mouseover');
+		}
+
+		function doubleClick() {
+			console.log('doubleClick');
+		}
+
+		function mouseOut() {
+			console.log('mouseOut');
+		}
+	</script>
+
+</body>
+</html>
