@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>AJAX GET</title>
+	<script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	<img src="" id="image">
+	<p id="name"></p>
+	<p id="email"></p>
+
+	<script>
+		$(document).ready(function(){
+			$.ajax({url: "https://randomuser.me/api/",
+				success: function(res) {
+					// document.write(JSON.stringify(result));
+					var name = res.results[0].name.first + " " + res.results[0].name.last;
+					var email = res.results[0].email;
+					var image = res.results[0].picture.large;
+					$("#image").attr("src", image);
+					$('p#name').text("Name: " + name);
+					$('p#email').text("E-mail: " + email);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

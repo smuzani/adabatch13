@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>AJAX POST</title>
+	<script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	<input type="text" id="id" placeholder="ID"><br>
+	<input type="text" id="name" placeholder="Name"><br>
+	<input type="text" id="phone" placeholder="Phone"><br>
+	<input type="text" id="email" placeholder="E-mail"><br>
+
+	<br><br>
+	<button onclick="sendData()">POST</button>
+
+	<script>
+		function sendData() {
+			var data = {"data":[{
+			        "id": $("#id").val(),
+			        "name": $("#name").val(),
+			        "phone": $("#phone").val(),
+			        "email": $("#email").val()
+			    }]};
+
+			$.post("https://sheetdb.io/api/v1/ap2kcbjykjyh8", data,
+				function(result, status){
+					console.log("Result: " + result + "\nStatus: " + status);
+				})
+		}
+	</script>
+</body>
+</html>

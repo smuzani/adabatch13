@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery hide and show</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1>Hide and show</h1>
+	<p>paragraph 1</p>
+	<p>click hide to hide</p>
+	<p>click show to show</p>
+	<button id="hide">HIDE</button> <button id="show">SHOW</button>
+	<button id="fadetoggle">FADE TOGGLE</button>
+
+	<script>
+		$(document).ready(function(){
+			$("h1").fadeOut("fast").delay(500).fadeIn("slow");
+		});
+
+		$("#hide").click(function(){
+			$("p").hide("slow", function(){
+				alert("The paragraph is hidden");
+			});
+		});
+
+		$("#show").click(function(){
+			$("p").show(2000, function(){
+				alert("The paragraph is shown");
+			});
+		});
+
+		$("#fadetoggle").click(function(){
+			$("p:eq(0)").fadeToggle();
+			$("p:eq(1)").fadeToggle("slow");
+			$("p:eq(2)").fadeToggle(3000);
+		});
+
+		$("h1").hover(function(){
+			var h = $("h1");
+			h.animate({marginLeft: '100px'}, "slow");
+			h.animate({fontSize: '3em'}, "slow");
+		}, function(){
+			var h = $("h1");
+			h.animate({marginLeft: '0px'}, "slow");
+			h.animate({fontSize: '24px'}, "slow");
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery</title>
+	<!-- <script src="js/jquery-3.3.1.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<div id="example"></div>
+	<h1>My To Do List</h1>
+	<label for="item">Enter a new item:</label>
+	<input type="text" name="item" id="item">
+	<button onclick="addItem()">Add item</button>
+
+	<ul id="list"></ul>
+
+
+	<script>
+		function addItem() {
+			var itemName = $("#item").val();
+			$("#list").append("<li>" + itemName + " <button>delete</button></li>");
+		}
+	</script>
+
+	
+</body>
+</html>
