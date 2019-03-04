@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Sheet DB</title>
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<style>
+		table {
+			border-collapse: collapse;
+		}
+		table td,th {
+			border: 1px solid;
+			padding: 4px;
+		}
+	</style>
+</head>
+<body>
+	<table id="users">
+		<tr>
+			<th>Name</th>
+			<th>Phone</th>
+			<th>Email</th>
+		</tr>
+	</table>
+
+	<script>
+		$(document).ready(function(){
+			$.ajax({url: "https://sheetdb.io/api/v1/ap2kcbjykjyh8",
+				success: function(res) {
+					for (var i = 0; i < res.length; i++) {
+						var line = "<tr><td>" + res[i].name + "</td><td>" + res[i].phone + "</td><td>" + res[i].email + "</td></tr>";
+						$("table#users").append(line);
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>
