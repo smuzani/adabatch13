@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Geolocation</title>
+    <style>
+    	body {
+    		background-color: #66ccff;
+    	}
+
+    	.phone {
+    		font-size: 1.2em;
+    		font-weight: 300;
+    		margin-top: 14px;
+    	}
+
+    	#map {
+		  height: 500px;
+		}
+    </style>
+  </head>
+  <body>
+  	<div class="container">
+	    <h1 class="text-center">Locations</h1>
+
+	    <div class="row text-center">
+	    	<div class="col-4">
+	    		<h4>Dpulze Cyberjaya</h4>
+	    		<img class="img-fluid" src="dpulze.jpg">
+	    		<p class="phone">0123456789</p>
+	    		<p id="dpulze-distance"></p>
+	    	</div>
+	    	<div class="col-4">
+	    		<h4>Sunway Pyramid</h4>
+	    		<img class="img-fluid" src="pyramid.jpg">
+	    		<p class="phone">0123456789</p>
+	    		<p id="sunway-distance"></p>
+	    	</div>
+	    	<div class="col-4">
+	    		<h4>KLCC</h4>
+	    		<img class="img-fluid" src="klcc.jpg">
+	    		<p class="phone">0123456789</p>
+	    		<p id="klcc-distance"></p>
+	    	</div>
+	    </div>
+
+	    <div id="map"></div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+    	if (navigator.geolocation) {
+    		navigator.geolocation.getCurrentPosition(function(position) {
+    			var lat = position.coords.latitude;
+    			var lng = position.coords.longitude;
+    			// alert("Lat: " + lat + ", lng: " + lng);
+    			var coordsHere = [lat, lng];
+    			showDistance(coordsHere);
+    		})
+    	} else {
+    		var coordsHere = [3.1073, 101.6402];
+    		showDistance(coordsHere);
+    	}
+
+    	function showDistance(coordsHere){
+			var coordsKlcc = [3.1466, 101.6958];
+			var coordsSunway = [3.0728, 101.6070];
+			var coordsDpulze = [2.9222, 101.6510];
+
+			var klccDistance = haversineDistance(coordsHere, coordsKlcc, false);
+			var sunwayDistance = haversineDistance(coordsHere, coordsSunway, false);
+			var dpulzeDistance = haversineDistance(coordsHere, coordsDpulze, false);
+			// console.log(klccDistance);
+			$("#klcc-distance").text(klccDistance + "km");
+			$("#sunway-distance").text(sunwayDistance + "km");
+			$("#dpulze-distance").text(dpulzeDistance + "km");
+    	}
+
+    	function haversineDistance(coords1, coords2, isMiles) {
+		  function toRad(x) {
+		    return x * Math.PI / 180;
+		  }
+
+		  var lat1 = coords1[0];
+		  var lon1 = coords1[1];
+
+		  var lat2 = coords2[0];
+		  var lon2 = coords2[1];
+
+		  var R = 6371; // km
+
+		  var x1 = lat2 - lat1;
+		  var dLat = toRad(x1);
+		  var x2 = lon2 - lon1;
+		  var dLon = toRad(x2)
+		  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+		    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+		  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		  var d = R * c;
+
+		  if(isMiles) d /= 1.60934;
+
+		  return Math.round(d);
+		}
+
+		var map;
+	    function initMap() {
+	      var sunway = {lat: 3.0728, lng: 101.6070};
+
+	      map = new google.maps.Map(document.getElementById('map'), {
+	        center: {lat: 3.1073, lng: 101.6402},
+	        zoom: 12
+	      });
+	      var marker = new google.maps.Marker({position: sunway, map: map});
+	    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkqGTd8JUDQvQ3LqsNgL6UbyN0JJ_mDpI&callback=initMap"
+    async defer></script>
+
+  </body>
+</html>

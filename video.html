@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Video</title>
+	<script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+	<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/vV6W1rVMcmQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+	<video id="video" width="560" poster="vsq.jpg" loop>
+		<source src="biryani.mp4" type="video/mp4">
+		Your browser does not support this video.
+	</video>
+
+	<div id="video-controls">
+		<button id="playBtn">Play</button>
+		<input type="range" id="seekBar" min="0" max="100">
+		<label for="volume">Volume</label>
+		<input type="range" id="volume" min="0" max="1" step="0.1">
+	</div>
+
+	<script>
+		$(document).ready(function(){
+			var playBtn = $("#playBtn");
+			var seekbar = document.getElementById("seekBar");
+			var video = document.getElementById("video");
+			var volumeControl = document.getElementById("volume");
+			playBtn.click(function(e){
+				$("#video").trigger("play");
+			});
+
+			seekbar.addEventListener("change", function(e) {
+				var time = video.duration * (seekbar.value / 100);
+				video.currentTime = time;
+			});
+
+			seekbar.addEventListener("mousemove mousedown", function(e) {
+				var time = video.duration * (seekbar.value / 100);
+				video.currentTime = time;
+			});
+
+			volumeControl.addEventListener("change", function(e) {
+				video.volume = volumeControl.value
+			});
+
+			video.addEventListener("timeupdate", function(e) {
+				var value = (100 / video.duration) * video.currentTime;
+				seekbar.value = value;
+			});
+
+			seekbar.addEventListener("mouseup", function(e) {
+				video.play();
+			});
+
+			seekbar.addEventListener("touchend", function(e) {
+				video.play();
+			});
+
+			seekbar.addEventListener("mousedown", function(e) {
+				video.pause();
+			});
+
+			seekbar.addEventListener("touchstart", function(e) {
+				video.pause();
+			});
+
+		});
+	</script>
+
+
+</body>
+</html>
